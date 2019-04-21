@@ -10,7 +10,8 @@
 
 int main(void)
 {
-	DDRB |= (1<<PB1);	/* Make OC1A pin as output */ 
+	
+	DDRB |= (1<<PB1);	/* Make OC1A pin as output */
 	TCNT1 = 0;		/* Set timer1 count zero */
 	ICR1 = 2499;		/* Set TOP count for timer1 in ICR1 register */
 
@@ -20,11 +21,12 @@ int main(void)
 	while(1)
 	{
 		OCR1A = 0;	/* Set servo shaft at -90° position */
-		_delay_ms(1000);
-		OCR1A = 50;	/* Set servo shaft at 0° position */
-		_delay_ms(1000);
+		_delay_ms(200);
+		OCR1A = 175;	/* Set servo shaft at 0° position */
+		_delay_ms(200);
 		//OCR1A = 300;	/* Set servo at +90° position */
-		//_delay_ms(1000);
+		//_delay_ms(1500);
 	}
+	
 }
 

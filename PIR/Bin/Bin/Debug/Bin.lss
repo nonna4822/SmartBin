@@ -3,29 +3,27 @@ Bin.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  0000010c  2**0
+  0 .data         00000000  00800100  00800100  00000132  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000000b8  00000000  00000000  00000054  2**1
+  1 .text         000000de  00000000  00000000  00000054  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  0000010c  2**0
+  2 .comment      00000030  00000000  00000000  00000132  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  0000013c  2**2
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000164  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000020  00000000  00000000  0000017c  2**0
+  4 .debug_aranges 00000020  00000000  00000000  000001a4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   000006fd  00000000  00000000  0000019c  2**0
+  5 .debug_info   0000070a  00000000  00000000  000001c4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000065e  00000000  00000000  00000899  2**0
+  6 .debug_abbrev 00000667  00000000  00000000  000008ce  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000264  00000000  00000000  00000ef7  2**0
+  7 .debug_line   0000026d  00000000  00000000  00000f35  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000024  00000000  00000000  0000115c  2**2
+  8 .debug_frame  00000024  00000000  00000000  000011a4  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    0000037c  00000000  00000000  00001180  2**0
+  9 .debug_str    0000038e  00000000  00000000  000011c8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000048  00000000  00000000  000014fc  2**0
-                  CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000010  00000000  00000000  00001544  2**0
+ 10 .debug_ranges 00000010  00000000  00000000  00001556  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -66,72 +64,79 @@ Disassembly of section .text:
   70:	de bf       	out	0x3e, r29	; 62
   72:	cd bf       	out	0x3d, r28	; 61
   74:	0e 94 40 00 	call	0x80	; 0x80 <main>
-  78:	0c 94 5a 00 	jmp	0xb4	; 0xb4 <_exit>
+  78:	0c 94 6d 00 	jmp	0xda	; 0xda <_exit>
 
 0000007c <__bad_interrupt>:
   7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000080 <main>:
-#include <util/delay.h>
 
 
 int main(void)
 {
-	DDRB = 0x00;
-  80:	14 b8       	out	0x04, r1	; 4
-	DDRD = 0xff;
-  82:	8f ef       	ldi	r24, 0xFF	; 255
-  84:	8a b9       	out	0x0a, r24	; 10
-    /* Replace with your application code */
-    while (1) 
-    {
+	//DDRB &= (0<<PB0);
+	DDRB |= (1<<PB1);	/* Make OC1A pin as output */
+  80:	21 9a       	sbi	0x04, 1	; 4
+	TCNT1 = 0;		/* Set timer1 count zero */
+  82:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <__TEXT_REGION_LENGTH__+0x7e0085>
+  86:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <__TEXT_REGION_LENGTH__+0x7e0084>
+	ICR1 = 2499;		/* Set TOP count for timer1 in ICR1 register */
+  8a:	83 ec       	ldi	r24, 0xC3	; 195
+  8c:	99 e0       	ldi	r25, 0x09	; 9
+  8e:	90 93 87 00 	sts	0x0087, r25	; 0x800087 <__TEXT_REGION_LENGTH__+0x7e0087>
+  92:	80 93 86 00 	sts	0x0086, r24	; 0x800086 <__TEXT_REGION_LENGTH__+0x7e0086>
+	
+	/* Set Fast PWM, TOP in ICR1, Clear OC1A on compare match, clk/64 */
+	TCCR1A = (1<<WGM11)|(1<<COM1A1);
+  96:	82 e8       	ldi	r24, 0x82	; 130
+  98:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__TEXT_REGION_LENGTH__+0x7e0080>
+	TCCR1B = (1<<WGM12)|(1<<WGM13)|(1<<CS10)|(1<<CS11);
+  9c:	8b e1       	ldi	r24, 0x1B	; 27
+  9e:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7e0081>
+	
+	/* Replace with your application code */
+	while (1)
+	{
+		OCR1A = 22;
+  a2:	e8 e8       	ldi	r30, 0x88	; 136
+  a4:	f0 e0       	ldi	r31, 0x00	; 0
+  a6:	46 e1       	ldi	r20, 0x16	; 22
+  a8:	50 e0       	ldi	r21, 0x00	; 0
+  aa:	51 83       	std	Z+1, r21	; 0x01
+  ac:	40 83       	st	Z, r20
 		if(PINB & (1<<PORTB)){
-			PORTD = 0x46;
-  86:	36 e4       	ldi	r19, 0x46	; 70
-	DDRB = 0x00;
-	DDRD = 0xff;
-    /* Replace with your application code */
-    while (1) 
-    {
-		if(PINB & (1<<PORTB)){
-  88:	83 b1       	in	r24, 0x03	; 3
-  8a:	25 b1       	in	r18, 0x05	; 5
-  8c:	90 e0       	ldi	r25, 0x00	; 0
-  8e:	02 c0       	rjmp	.+4      	; 0x94 <main+0x14>
-  90:	95 95       	asr	r25
-  92:	87 95       	ror	r24
-  94:	2a 95       	dec	r18
-  96:	e2 f7       	brpl	.-8      	; 0x90 <main+0x10>
-  98:	80 ff       	sbrs	r24, 0
-  9a:	f6 cf       	rjmp	.-20     	; 0x88 <main+0x8>
-			PORTD = 0x46;
-  9c:	3b b9       	out	0x0b, r19	; 11
+  ae:	83 b1       	in	r24, 0x03	; 3
+  b0:	25 b1       	in	r18, 0x05	; 5
+  b2:	90 e0       	ldi	r25, 0x00	; 0
+  b4:	02 c0       	rjmp	.+4      	; 0xba <main+0x3a>
+  b6:	95 95       	asr	r25
+  b8:	87 95       	ror	r24
+  ba:	2a 95       	dec	r18
+  bc:	e2 f7       	brpl	.-8      	; 0xb6 <main+0x36>
+  be:	80 ff       	sbrs	r24, 0
+  c0:	f4 cf       	rjmp	.-24     	; 0xaa <main+0x2a>
+			OCR1A = 0;	/* Set servo shaft at -90° position */
+  c2:	11 82       	std	Z+1, r1	; 0x01
+  c4:	10 82       	st	Z, r1
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
-  9e:	2f ef       	ldi	r18, 0xFF	; 255
-  a0:	89 e6       	ldi	r24, 0x69	; 105
-  a2:	98 e1       	ldi	r25, 0x18	; 24
-  a4:	21 50       	subi	r18, 0x01	; 1
-  a6:	80 40       	sbci	r24, 0x00	; 0
-  a8:	90 40       	sbci	r25, 0x00	; 0
-  aa:	e1 f7       	brne	.-8      	; 0xa4 <main+0x24>
-  ac:	00 c0       	rjmp	.+0      	; 0xae <main+0x2e>
-  ae:	00 00       	nop
-			_delay_ms(1000);
-			//PORTD = 0x8f;
-			//_delay_ms(1000);
-			//PORTD = 0x89;
-			//_delay_ms(1000);
-			PORTD = 0x00;
-  b0:	1b b8       	out	0x0b, r1	; 11
-  b2:	ea cf       	rjmp	.-44     	; 0x88 <main+0x8>
+  c6:	2f ef       	ldi	r18, 0xFF	; 255
+  c8:	81 ee       	ldi	r24, 0xE1	; 225
+  ca:	94 e0       	ldi	r25, 0x04	; 4
+  cc:	21 50       	subi	r18, 0x01	; 1
+  ce:	80 40       	sbci	r24, 0x00	; 0
+  d0:	90 40       	sbci	r25, 0x00	; 0
+  d2:	e1 f7       	brne	.-8      	; 0xcc <main+0x4c>
+  d4:	00 c0       	rjmp	.+0      	; 0xd6 <main+0x56>
+  d6:	00 00       	nop
+  d8:	e8 cf       	rjmp	.-48     	; 0xaa <main+0x2a>
 
-000000b4 <_exit>:
-  b4:	f8 94       	cli
+000000da <_exit>:
+  da:	f8 94       	cli
 
-000000b6 <__stop_program>:
-  b6:	ff cf       	rjmp	.-2      	; 0xb6 <__stop_program>
+000000dc <__stop_program>:
+  dc:	ff cf       	rjmp	.-2      	; 0xdc <__stop_program>
