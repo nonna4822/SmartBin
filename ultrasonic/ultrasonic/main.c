@@ -64,7 +64,7 @@ int main(void)
 	PORTB |= (1<<PORTB0);
 
 	sei();                /* Enable global interrupt */
-	EIMSK = (1 << TOIE1); /* Enable Timer1 overflow interrupts */
+	TIMSK1 = (1 << TOIE1); /* Enable Timer1 overflow interrupts */
 	TCCR1A = 0;           /* Set all bit to zero Normal operation */
 	
 	sendCommand(0x38);
@@ -87,27 +87,26 @@ int main(void)
 
 		TCNT1 = 0;         /* Clear Timer counter */
 		TCCR1B = 0x41;     /* Capture on rising edge, No prescaler*/
-		TIFR0 = 1 << ICF1; /* Clear ICP flag (Input Capture flag) */
-		TIFR0 = 1 << TOV1; /* Clear Timer Overflow flag */
+		TIFR1 = 1 << ICF1; /* Clear ICP flag (Input Capture flag) */
+		TIFR1 = 1 << TOV1; /* Clear Timer Overflow flag */
 
 		/*Calculate width of Echo by Input Capture (ICP) */
 
-		while ((TIFR0 & (1 << ICF1)) == 0)
-		;              /* Wait for rising edge */
+		while ((TIFR1 & (1 << ICF1)) == 0);              /* Wait for rising edge */
 		TCNT1 = 0;         /* Clear Timer counter */
 		TCCR1B = 0x01;     /* Capture on falling edge, No prescaler */
-		TIFR0 = 1 << ICF1; /* Clear ICP flag (Input Capture flag) */
-		TIFR0 = 1 << TOV1; /* Clear Timer Overflow flag */
+		TIFR1 = 1 << ICF1; /* Clear ICP flag (Input Capture flag) */
+		TIFR1 = 1 << TOV1; /* Clear Timer Overflow flag */
 		TimerOverflow = 0; /* Clear Timer overflow count */
 
-		while ((TIFR0 & (1 << ICF1)) == 0)
-		;                                   /* Wait for falling edge */
+		while ((TIFR1 & (1 << ICF1)) == 0);  /* Wait for falling edge */
 		count = ICR1 + (65535 * TimerOverflow); /* Take count */
 		/* 8MHz Timer freq, sound speed =343 m/s */
 		distance = (double)count / 466.47;
 		
-		
-		char buffer[] = "naranahee";
+		char buffer[20];
+		dtostrf(distance, 2, 2, buffer);
+		strcat(buffer," cm");
 		for (i=0; i<strlen(buffer); i++)
 		{
 			sendData(buffer[i]);
