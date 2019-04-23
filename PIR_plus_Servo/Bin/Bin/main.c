@@ -14,7 +14,6 @@
 
 int main(void)
 {
-	//DDRB &= (0<<PB0);
 	DDRB |= (1<<PB1);	/* Make OC1A pin as output */
 	TCNT1 = 0;		/* Set timer1 count zero */
 	ICR1 = 2499;		/* Set TOP count for timer1 in ICR1 register */
@@ -26,12 +25,16 @@ int main(void)
 	/* Replace with your application code */
 	while (1)
 	{
-		OCR1A = 22;
-		if(PINB & (1<<PORTB)){
-			OCR1A = 0;	/* Set servo shaft at -90° position */
-			_delay_ms(200);
-			//OCR1A = 175;	/* Set servo shaft at 0° position */
-			//_delay_ms(200);
+		OCR1A = 0;
+		if(PINB & (1<<PORTB) ){
+			if(PIND & (1<<PIND2)){ //close bin
+				OCR1A = 0;
+				_delay_ms(100);
+			}else {
+				OCR1A = 65;	//open bin
+				_delay_ms(100);
+			}
+			
 		}
 	}
 }

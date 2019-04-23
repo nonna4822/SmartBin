@@ -79,6 +79,7 @@ int main(void)
 		sendCommand(0x80);
 		
 		int i=0;
+		DDRB |= (1<<PB2);
 		
 		/* Give 10us trigger pulse on trig. pin to HC-SR04 */
 		PORTB |= (1 << Trigger_pin);
@@ -103,6 +104,12 @@ int main(void)
 		count = ICR1 + (65535 * TimerOverflow); /* Take count */
 		/* 8MHz Timer freq, sound speed =343 m/s */
 		distance = (double)count / 466.47;
+		
+		if(distance < 1){
+			PORTB |= (1<<PB2);
+		}else{
+			PORTB &= ~(1<<PB2);
+		}
 		
 		char buffer[20];
 		dtostrf(distance, 2, 2, buffer);
