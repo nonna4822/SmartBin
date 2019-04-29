@@ -110,6 +110,7 @@ int main(void)
 				OCR1A = 175;
 				_delay_ms(100);
 			}else {
+<<<<<<< HEAD
 				OCR1A = 300;	//open bin
   a6:	6c e2       	ldi	r22, 0x2C	; 44
   a8:	71 e0       	ldi	r23, 0x01	; 1
@@ -122,6 +123,12 @@ int main(void)
   aa:	4f ea       	ldi	r20, 0xAF	; 175
   ac:	50 e0       	ldi	r21, 0x00	; 0
 	TCCR1B = (1<<WGM12)|(1<<WGM13)|(1<<CS11);
+=======
+				OCR1A = 65;	//open bin
+  a6:	41 e4       	ldi	r20, 0x41	; 65
+  a8:	50 e0       	ldi	r21, 0x00	; 0
+	TCCR1B = (1<<WGM12)|(1<<WGM13)|(1<<CS10)|(1<<CS11);
+>>>>>>> ab60a1b61b5dca008e54405a93b86d55a88f34ba
 	
 	/* Replace with your application code */
 	while (1)
@@ -161,6 +168,7 @@ int main(void)
   da:	e9 cf       	rjmp	.-46     	; 0xae <main+0x2e>
 				_delay_ms(100);
 			}else {
+<<<<<<< HEAD
 				OCR1A = 300;	//open bin
   dc:	71 83       	std	Z+1, r23	; 0x01
   de:	60 83       	st	Z, r22
@@ -171,6 +179,21 @@ int main(void)
   e8:	00 c0       	rjmp	.+0      	; 0xea <main+0x6a>
   ea:	00 00       	nop
   ec:	e0 cf       	rjmp	.-64     	; 0xae <main+0x2e>
+=======
+				OCR1A = 65;	//open bin
+  de:	51 83       	std	Z+1, r21	; 0x01
+  e0:	40 83       	st	Z, r20
+  e2:	2f ef       	ldi	r18, 0xFF	; 255
+  e4:	80 e7       	ldi	r24, 0x70	; 112
+  e6:	92 e0       	ldi	r25, 0x02	; 2
+  e8:	21 50       	subi	r18, 0x01	; 1
+  ea:	80 40       	sbci	r24, 0x00	; 0
+  ec:	90 40       	sbci	r25, 0x00	; 0
+  ee:	e1 f7       	brne	.-8      	; 0xe8 <main+0x68>
+  f0:	00 c0       	rjmp	.+0      	; 0xf2 <main+0x72>
+  f2:	00 00       	nop
+  f4:	da cf       	rjmp	.-76     	; 0xaa <main+0x2a>
+>>>>>>> ab60a1b61b5dca008e54405a93b86d55a88f34ba
 
 000000ee <_exit>:
   ee:	f8 94       	cli
