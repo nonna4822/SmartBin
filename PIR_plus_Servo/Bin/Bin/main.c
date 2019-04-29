@@ -28,14 +28,8 @@ int main(void)
 	{
 		OCR1A = 0;
 		if(PINB & (1<<PORTB) ){
-			if(PIND & (1<<PIND2)){ //close bin
-				OCR1A = 175;
-				_delay_ms(100);
-			}else {
-				OCR1A = 300;	//open bin
-				_delay_ms(100);
-			}
-			
+				OCR1A = 175;	//open bin
+				_delay_ms(1000)		
 		}
 	}
 }
