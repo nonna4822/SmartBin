@@ -32,11 +32,7 @@ int main(void)
 				OCR1A = 175;
 				_delay_ms(100);
 			}else {
-<<<<<<< HEAD
 				OCR1A = 300;	//open bin
-=======
-				OCR1A = 65;	//open bin
->>>>>>> ab60a1b61b5dca008e54405a93b86d55a88f34ba
 				_delay_ms(100);
 			}
 			
