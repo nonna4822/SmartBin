@@ -107,8 +107,8 @@ int main(void)
 				OCR1A = 0;
 				_delay_ms(100);
 			}else {
-				OCR1A = 22;	//open bin
-  a6:	46 e1       	ldi	r20, 0x16	; 22
+				OCR1A = 65;	//open bin
+  a6:	41 e4       	ldi	r20, 0x41	; 65
   a8:	50 e0       	ldi	r21, 0x00	; 0
 	TCCR1B = (1<<WGM12)|(1<<WGM13)|(1<<CS10)|(1<<CS11);
 	
@@ -153,7 +153,7 @@ int main(void)
   dc:	e6 cf       	rjmp	.-52     	; 0xaa <main+0x2a>
 				_delay_ms(100);
 			}else {
-				OCR1A = 22;	//open bin
+				OCR1A = 65;	//open bin
   de:	51 83       	std	Z+1, r21	; 0x01
   e0:	40 83       	st	Z, r20
   e2:	2f ef       	ldi	r18, 0xFF	; 255
