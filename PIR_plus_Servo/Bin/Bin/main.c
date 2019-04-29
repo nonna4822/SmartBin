@@ -31,7 +31,7 @@ int main(void)
 				OCR1A = 0;
 				_delay_ms(100);
 			}else {
-				OCR1A = 65;	//open bin
+				OCR1A = 22;	//open bin
 				_delay_ms(100);
 			}
 			
