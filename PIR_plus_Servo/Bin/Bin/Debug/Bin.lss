@@ -3,29 +3,27 @@ Bin.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  00000146  2**0
+  0 .data         00000000  00800100  00800100  00000132  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000000f2  00000000  00000000  00000054  2**1
+  1 .text         000000de  00000000  00000000  00000054  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  00000146  2**0
+  2 .comment      00000030  00000000  00000000  00000132  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000178  2**2
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000164  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000020  00000000  00000000  000001b8  2**0
+  4 .debug_aranges 00000020  00000000  00000000  000001a4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000743  00000000  00000000  000001d8  2**0
+  5 .debug_info   0000070a  00000000  00000000  000001c4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000068a  00000000  00000000  0000091b  2**0
+  6 .debug_abbrev 00000667  00000000  00000000  000008ce  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000297  00000000  00000000  00000fa5  2**0
+  7 .debug_line   00000279  00000000  00000000  00000f35  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000024  00000000  00000000  0000123c  2**2
+  8 .debug_frame  00000024  00000000  00000000  000011b0  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000390  00000000  00000000  00001260  2**0
+  9 .debug_str    00000390  00000000  00000000  000011d4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000048  00000000  00000000  000015f0  2**0
-                  CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000010  00000000  00000000  00001638  2**0
+ 10 .debug_ranges 00000010  00000000  00000000  00001564  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -66,7 +64,7 @@ Disassembly of section .text:
   70:	de bf       	out	0x3e, r29	; 62
   72:	cd bf       	out	0x3d, r28	; 61
   74:	0e 94 40 00 	call	0x80	; 0x80 <main>
-  78:	0c 94 77 00 	jmp	0xee	; 0xee <_exit>
+  78:	0c 94 6d 00 	jmp	0xda	; 0xda <_exit>
 
 0000007c <__bad_interrupt>:
   7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -105,98 +103,60 @@ int main(void)
 		OCR1A = 0;
   a2:	e8 e8       	ldi	r30, 0x88	; 136
   a4:	f0 e0       	ldi	r31, 0x00	; 0
-		if(PINB & (1<<PORTB) ){
-			if(PIND & (1<<PIND2)){ //close bin
-				OCR1A = 175;
-				_delay_ms(100);
-			}else {
-<<<<<<< HEAD
-				OCR1A = 300;	//open bin
-  a6:	6c e2       	ldi	r22, 0x2C	; 44
-  a8:	71 e0       	ldi	r23, 0x01	; 1
-	while (1)
-	{
-		OCR1A = 0;
-		if(PINB & (1<<PORTB) ){
-			if(PIND & (1<<PIND2)){ //close bin
-				OCR1A = 175;
-  aa:	4f ea       	ldi	r20, 0xAF	; 175
-  ac:	50 e0       	ldi	r21, 0x00	; 0
-	TCCR1B = (1<<WGM12)|(1<<WGM13)|(1<<CS11);
-=======
-				OCR1A = 65;	//open bin
-  a6:	41 e4       	ldi	r20, 0x41	; 65
+				//OCR1A = 300;
+				//_delay_ms(100);
+				//OCR1A = 175;
+				//_delay_ms(100);
+			//}else {
+				OCR1A = 175;	//open bin
+  a6:	4f ea       	ldi	r20, 0xAF	; 175
   a8:	50 e0       	ldi	r21, 0x00	; 0
-	TCCR1B = (1<<WGM12)|(1<<WGM13)|(1<<CS10)|(1<<CS11);
->>>>>>> ab60a1b61b5dca008e54405a93b86d55a88f34ba
+	TCCR1B = (1<<WGM12)|(1<<WGM13)|(1<<CS11);
 	
 	/* Replace with your application code */
 	while (1)
 	{
 		OCR1A = 0;
-  ae:	11 82       	std	Z+1, r1	; 0x01
-  b0:	10 82       	st	Z, r1
+  aa:	11 82       	std	Z+1, r1	; 0x01
+  ac:	10 82       	st	Z, r1
 		if(PINB & (1<<PORTB) ){
-  b2:	83 b1       	in	r24, 0x03	; 3
-  b4:	25 b1       	in	r18, 0x05	; 5
-  b6:	90 e0       	ldi	r25, 0x00	; 0
-  b8:	02 c0       	rjmp	.+4      	; 0xbe <main+0x3e>
-  ba:	95 95       	asr	r25
-  bc:	87 95       	ror	r24
-  be:	2a 95       	dec	r18
-  c0:	e2 f7       	brpl	.-8      	; 0xba <main+0x3a>
-  c2:	80 ff       	sbrs	r24, 0
-  c4:	f4 cf       	rjmp	.-24     	; 0xae <main+0x2e>
-			if(PIND & (1<<PIND2)){ //close bin
-  c6:	4a 9b       	sbis	0x09, 2	; 9
-  c8:	09 c0       	rjmp	.+18     	; 0xdc <main+0x5c>
-				OCR1A = 175;
-  ca:	51 83       	std	Z+1, r21	; 0x01
-  cc:	40 83       	st	Z, r20
+  ae:	83 b1       	in	r24, 0x03	; 3
+  b0:	25 b1       	in	r18, 0x05	; 5
+  b2:	90 e0       	ldi	r25, 0x00	; 0
+  b4:	02 c0       	rjmp	.+4      	; 0xba <main+0x3a>
+  b6:	95 95       	asr	r25
+  b8:	87 95       	ror	r24
+  ba:	2a 95       	dec	r18
+  bc:	e2 f7       	brpl	.-8      	; 0xb6 <main+0x36>
+  be:	80 ff       	sbrs	r24, 0
+  c0:	f4 cf       	rjmp	.-24     	; 0xaa <main+0x2a>
+				//OCR1A = 300;
+				//_delay_ms(100);
+				//OCR1A = 175;
+				//_delay_ms(100);
+			//}else {
+				OCR1A = 175;	//open bin
+  c2:	51 83       	std	Z+1, r21	; 0x01
+  c4:	40 83       	st	Z, r20
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
-  ce:	87 ea       	ldi	r24, 0xA7	; 167
-  d0:	91 e6       	ldi	r25, 0x61	; 97
-  d2:	01 97       	sbiw	r24, 0x01	; 1
-  d4:	f1 f7       	brne	.-4      	; 0xd2 <main+0x52>
-  d6:	00 c0       	rjmp	.+0      	; 0xd8 <main+0x58>
-  d8:	00 00       	nop
-  da:	e9 cf       	rjmp	.-46     	; 0xae <main+0x2e>
-				_delay_ms(100);
-			}else {
-<<<<<<< HEAD
-				OCR1A = 300;	//open bin
-  dc:	71 83       	std	Z+1, r23	; 0x01
-  de:	60 83       	st	Z, r22
-  e0:	87 ea       	ldi	r24, 0xA7	; 167
-  e2:	91 e6       	ldi	r25, 0x61	; 97
-  e4:	01 97       	sbiw	r24, 0x01	; 1
-  e6:	f1 f7       	brne	.-4      	; 0xe4 <main+0x64>
-  e8:	00 c0       	rjmp	.+0      	; 0xea <main+0x6a>
-  ea:	00 00       	nop
-  ec:	e0 cf       	rjmp	.-64     	; 0xae <main+0x2e>
-=======
-				OCR1A = 65;	//open bin
-  de:	51 83       	std	Z+1, r21	; 0x01
-  e0:	40 83       	st	Z, r20
-  e2:	2f ef       	ldi	r18, 0xFF	; 255
-  e4:	80 e7       	ldi	r24, 0x70	; 112
-  e6:	92 e0       	ldi	r25, 0x02	; 2
-  e8:	21 50       	subi	r18, 0x01	; 1
-  ea:	80 40       	sbci	r24, 0x00	; 0
-  ec:	90 40       	sbci	r25, 0x00	; 0
-  ee:	e1 f7       	brne	.-8      	; 0xe8 <main+0x68>
-  f0:	00 c0       	rjmp	.+0      	; 0xf2 <main+0x72>
-  f2:	00 00       	nop
-  f4:	da cf       	rjmp	.-76     	; 0xaa <main+0x2a>
->>>>>>> ab60a1b61b5dca008e54405a93b86d55a88f34ba
+  c6:	2f e3       	ldi	r18, 0x3F	; 63
+  c8:	8d e0       	ldi	r24, 0x0D	; 13
+  ca:	93 e0       	ldi	r25, 0x03	; 3
+  cc:	21 50       	subi	r18, 0x01	; 1
+  ce:	80 40       	sbci	r24, 0x00	; 0
+  d0:	90 40       	sbci	r25, 0x00	; 0
+  d2:	e1 f7       	brne	.-8      	; 0xcc <main+0x4c>
+  d4:	00 c0       	rjmp	.+0      	; 0xd6 <main+0x56>
+  d6:	00 00       	nop
+  d8:	e8 cf       	rjmp	.-48     	; 0xaa <main+0x2a>
 
-000000ee <_exit>:
-  ee:	f8 94       	cli
+000000da <_exit>:
+  da:	f8 94       	cli
 
-000000f0 <__stop_program>:
-  f0:	ff cf       	rjmp	.-2      	; 0xf0 <__stop_program>
+000000dc <__stop_program>:
+  dc:	ff cf       	rjmp	.-2      	; 0xdc <__stop_program>

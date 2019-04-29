@@ -24,6 +24,7 @@ int main(void)
 	/* Replace with your application code */
 	while (1)
 	{
+<<<<<<< HEAD
 		OCR0A = 0;
 		if(PINC & (1<<PORTC0) ){
 			//close bin
@@ -32,6 +33,12 @@ int main(void)
 			
 				OCR0A = 175;	//open bin
 				_delay_ms(100);
+=======
+		OCR1A = 0;
+		if(PINB & (1<<PORTB) ){
+				OCR1A = 175;	//open bin
+				_delay_ms(1000)		
+>>>>>>> 5737044453cdc3e8b8bc8765f6825a38492a6309
 		}
 	}
 }
