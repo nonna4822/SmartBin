@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name Smart-Bin-rescue)(type Legacy)(uri "${KIPRJMOD}/Smart Bin-rescue.lib")(options "")(descr ""))
+)
