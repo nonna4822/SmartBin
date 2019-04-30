@@ -230,7 +230,11 @@ END GROUP
  *(.rela.plt)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .text           0x00000000      0x408
+=======
+.text           0x00000000      0x41a
+>>>>>>> parent of 60e2ce8... add ultrasonic function
 =======
 .text           0x00000000      0x41a
 >>>>>>> parent of 60e2ce8... add ultrasonic function
@@ -320,6 +324,7 @@ END GROUP
  .text.__vector_13
                 0x00000090       0x2e main.o
                 0x00000090                __vector_13
+<<<<<<< HEAD
 <<<<<<< HEAD
  .text.main     0x000000be       0xf4 main.o
                 0x000000be                main
@@ -425,6 +430,59 @@ END GROUP
                 0x00000416                _exit
                 0x00000416                exit
 >>>>>>> parent of 60e2ce8... add ultrasonic function
+=======
+ .text.main     0x000000be      0x106 main.o
+                0x000000be                main
+ .text.avr-libc.fplib
+                0x000001c4        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(cmpsf2.o)
+                0x000001c4                __nesf2
+                0x000001c4                __eqsf2
+                0x000001c4                __cmpsf2
+                0x000001c4                __ltsf2
+                0x000001c4                __lesf2
+ .text.avr-libc.fplib
+                0x000001ce        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
+                0x000001ce                __divsf3
+ .text.avr-libc.fplib
+                0x000001d6       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
+                0x000001f6                __divsf3x
+                0x000001fc                __divsf3_pse
+ .text.avr-libc.fplib
+                0x000002b2       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
+                0x000002b2                __floatunsisf
+                0x000002b6                __floatsisf
+ .text.avr-libc.fplib
+                0x0000032c       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_cmp.o)
+                0x0000032c                __fp_cmp
+ .text.avr-libc.fplib
+                0x00000374        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
+                0x00000374                __fp_inf
+ .text.avr-libc.fplib
+                0x00000380        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
+                0x00000380                __fp_nan
+ .text.avr-libc.fplib
+                0x00000386        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
+                0x00000386                __fp_pscA
+ .text.avr-libc.fplib
+                0x00000394        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
+                0x00000394                __fp_pscB
+ .text.avr-libc.fplib
+                0x000003a2       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
+                0x000003a2                __fp_round
+ .text.avr-libc.fplib
+                0x000003c4       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
+                0x000003c4                __fp_split3
+                0x000003d4                __fp_splitA
+ .text.avr-libc.fplib
+                0x00000408        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
+                0x00000408                __fp_zero
+                0x0000040a                __fp_szero
+                0x00000416                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x00000416        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000416                _exit
+                0x00000416                exit
+>>>>>>> parent of 60e2ce8... add ultrasonic function
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -444,17 +502,23 @@ END GROUP
  *(.fini1)
  *(.fini0)
 <<<<<<< HEAD
+<<<<<<< HEAD
  .fini0         0x00000404        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
                 0x00000408                _etext = .
 
 .data           0x00800100        0x0 load address 0x00000408
 =======
+=======
+>>>>>>> parent of 60e2ce8... add ultrasonic function
  .fini0         0x00000416        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
                 0x0000041a                _etext = .
 
 .data           0x00800100        0x0 load address 0x0000041a
+<<<<<<< HEAD
+>>>>>>> parent of 60e2ce8... add ultrasonic function
+=======
 >>>>>>> parent of 60e2ce8... add ultrasonic function
                 [!provide]                PROVIDE (__data_start, .)
  *(.data)
@@ -477,8 +541,13 @@ END GROUP
  *(COMMON)
                 0x00800102                PROVIDE (__bss_end, .)
 <<<<<<< HEAD
+<<<<<<< HEAD
                 0x00000408                __data_load_start = LOADADDR (.data)
                 0x00000408                __data_load_end = (__data_load_start + SIZEOF (.data))
+=======
+                0x0000041a                __data_load_start = LOADADDR (.data)
+                0x0000041a                __data_load_end = (__data_load_start + SIZEOF (.data))
+>>>>>>> parent of 60e2ce8... add ultrasonic function
 =======
                 0x0000041a                __data_load_start = LOADADDR (.data)
                 0x0000041a                __data_load_end = (__data_load_start + SIZEOF (.data))
@@ -562,15 +631,21 @@ END GROUP
  *(.debug_pubnames)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .debug_info     0x00000000      0x857
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_info    0x000005f4      0x263 main.o
 =======
+=======
+>>>>>>> parent of 60e2ce8... add ultrasonic function
 .debug_info     0x00000000      0x890
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_info    0x000005f4      0x29c main.o
+<<<<<<< HEAD
+>>>>>>> parent of 60e2ce8... add ultrasonic function
+=======
 >>>>>>> parent of 60e2ce8... add ultrasonic function
 
 .debug_abbrev   0x00000000      0x6f1
@@ -579,15 +654,21 @@ END GROUP
  .debug_abbrev  0x000005a2      0x14f main.o
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .debug_line     0x00000000      0x363
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x133 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_line    0x00000133      0x230 main.o
 =======
+=======
+>>>>>>> parent of 60e2ce8... add ultrasonic function
 .debug_line     0x00000000      0x375
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x133 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_line    0x00000133      0x242 main.o
+<<<<<<< HEAD
+>>>>>>> parent of 60e2ce8... add ultrasonic function
+=======
 >>>>>>> parent of 60e2ce8... add ultrasonic function
 
 .debug_frame    0x00000000       0x48

@@ -4,6 +4,7 @@ Bin.elf:     file format elf32-avr
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
 <<<<<<< HEAD
+<<<<<<< HEAD
   0 .data         00000000  00800100  00800100  0000047c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
   1 .text         00000408  00000000  00000000  00000074  2**1
@@ -29,6 +30,33 @@ Idx Name          Size      VMA       LMA       File off  Algn
  11 .debug_loc    00000143  00000000  00000000  00001bdf  2**0
                   CONTENTS, READONLY, DEBUGGING
  12 .debug_ranges 00000018  00000000  00000000  00001d22  2**0
+=======
+  0 .data         00000000  00800100  00800100  0000048e  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000041a  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000002  00800100  00800100  0000048e  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  0000048e  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000004c0  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000028  00000000  00000000  00000500  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000890  00000000  00000000  00000528  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 000006f1  00000000  00000000  00000db8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000375  00000000  00000000  000014a9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000048  00000000  00000000  00001820  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000003d7  00000000  00000000  00001868  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    0000018b  00000000  00000000  00001c3f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000018  00000000  00000000  00001dca  2**0
+>>>>>>> parent of 60e2ce8... add ultrasonic function
 =======
   0 .data         00000000  00800100  00800100  0000048e  2**0
                   CONTENTS, ALLOC, LOAD, DATA
@@ -111,7 +139,11 @@ Disassembly of section .text:
   82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
   84:	0e 94 5f 00 	call	0xbe	; 0xbe <main>
 <<<<<<< HEAD
+<<<<<<< HEAD
   88:	0c 94 02 02 	jmp	0x404	; 0x404 <_exit>
+=======
+  88:	0c 94 0b 02 	jmp	0x416	; 0x416 <_exit>
+>>>>>>> parent of 60e2ce8... add ultrasonic function
 =======
   88:	0c 94 0b 02 	jmp	0x416	; 0x416 <_exit>
 >>>>>>> parent of 60e2ce8... add ultrasonic function
@@ -217,6 +249,7 @@ ISR(TIMER1_OVF_vect)
  102:	f1 2c       	mov	r15, r1
  104:	f0 2d       	mov	r31, r0
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_delay_ms(1500);
 		}else{
 			PORTB &= ~(1<<PB2);
@@ -224,12 +257,17 @@ ISR(TIMER1_OVF_vect)
 			_delay_ms(1500);
 			OCR0A = 175; //90
 =======
+=======
+>>>>>>> parent of 60e2ce8... add ultrasonic function
 		/*servo-motor */
 		
 		if(PINC & (1<<PORTC0) ){
 				OCR0A = 0;	//0
 				_delay_ms(1500);
 				OCR0A = 175; //90
+<<<<<<< HEAD
+>>>>>>> parent of 60e2ce8... add ultrasonic function
+=======
 >>>>>>> parent of 60e2ce8... add ultrasonic function
  106:	0f 2e       	mov	r0, r31
  108:	ff ea       	ldi	r31, 0xAF	; 175
@@ -304,7 +342,11 @@ ISR(TIMER1_OVF_vect)
  14a:	80 e0       	ldi	r24, 0x00	; 0
  14c:	90 e0       	ldi	r25, 0x00	; 0
 <<<<<<< HEAD
+<<<<<<< HEAD
  14e:	0e 94 52 01 	call	0x2a4	; 0x2a4 <__floatsisf>
+=======
+ 14e:	0e 94 5b 01 	call	0x2b6	; 0x2b6 <__floatsisf>
+>>>>>>> parent of 60e2ce8... add ultrasonic function
 =======
  14e:	0e 94 5b 01 	call	0x2b6	; 0x2b6 <__floatsisf>
 >>>>>>> parent of 60e2ce8... add ultrasonic function
@@ -313,7 +355,11 @@ ISR(TIMER1_OVF_vect)
  156:	49 ee       	ldi	r20, 0xE9	; 233
  158:	53 e4       	ldi	r21, 0x43	; 67
 <<<<<<< HEAD
+<<<<<<< HEAD
  15a:	0e 94 de 00 	call	0x1bc	; 0x1bc <__divsf3>
+=======
+ 15a:	0e 94 e7 00 	call	0x1ce	; 0x1ce <__divsf3>
+>>>>>>> parent of 60e2ce8... add ultrasonic function
 =======
  15a:	0e 94 e7 00 	call	0x1ce	; 0x1ce <__divsf3>
 >>>>>>> parent of 60e2ce8... add ultrasonic function
@@ -321,6 +367,7 @@ ISR(TIMER1_OVF_vect)
  160:	30 e0       	ldi	r19, 0x00	; 0
  162:	40 e8       	ldi	r20, 0x80	; 128
  164:	5f e3       	ldi	r21, 0x3F	; 63
+<<<<<<< HEAD
 <<<<<<< HEAD
  166:	0e 94 d9 00 	call	0x1b2	; 0x1b2 <__cmpsf2>
  16a:	88 23       	and	r24, r24
@@ -332,6 +379,10 @@ ISR(TIMER1_OVF_vect)
 =======
  166:	0e 94 e2 00 	call	0x1c4	; 0x1c4 <__cmpsf2>
  16a:	88 23       	and	r24, r24
+=======
+ 166:	0e 94 e2 00 	call	0x1c4	; 0x1c4 <__cmpsf2>
+ 16a:	88 23       	and	r24, r24
+>>>>>>> parent of 60e2ce8... add ultrasonic function
  16c:	14 f4       	brge	.+4      	; 0x172 <main+0xb4>
 			PORTB |= (1<<PB2);
  16e:	2a 9a       	sbi	0x05, 2	; 5
@@ -339,6 +390,9 @@ ISR(TIMER1_OVF_vect)
 			}else{
 			PORTB &= ~(1<<PB2);
  172:	2a 98       	cbi	0x05, 2	; 5
+<<<<<<< HEAD
+>>>>>>> parent of 60e2ce8... add ultrasonic function
+=======
 >>>>>>> parent of 60e2ce8... add ultrasonic function
 	#else
 		//round up by default
@@ -346,6 +400,7 @@ ISR(TIMER1_OVF_vect)
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
+<<<<<<< HEAD
 <<<<<<< HEAD
  172:	ff ed       	ldi	r31, 0xDF	; 223
  174:	23 e9       	ldi	r18, 0x93	; 147
@@ -710,6 +765,8 @@ ISR(TIMER1_OVF_vect)
 00000406 <__stop_program>:
  406:	ff cf       	rjmp	.-2      	; 0x406 <__stop_program>
 =======
+=======
+>>>>>>> parent of 60e2ce8... add ultrasonic function
  174:	83 e2       	ldi	r24, 0x23	; 35
  176:	94 ef       	ldi	r25, 0xF4	; 244
  178:	01 97       	sbiw	r24, 0x01	; 1
@@ -1086,4 +1143,7 @@ ISR(TIMER1_OVF_vect)
 
 00000418 <__stop_program>:
  418:	ff cf       	rjmp	.-2      	; 0x418 <__stop_program>
+<<<<<<< HEAD
+>>>>>>> parent of 60e2ce8... add ultrasonic function
+=======
 >>>>>>> parent of 60e2ce8... add ultrasonic function
