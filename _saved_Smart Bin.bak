@@ -1,0 +1,219 @@
+EESchema Schematic File Version 4
+LIBS:Smart Bin-cache
+EELAYER 26 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L MCU_Microchip_ATmega:ATmega328P-PU U?
+U 1 1 5CBF1FA4
+P 3150 3700
+F 0 "U?" H 2509 3746 50  0000 R CNN
+F 1 "ATmega328P-PU" H 2509 3655 50  0000 R CNN
+F 2 "Package_DIP:DIP-28_W7.62mm" H 3150 3700 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 3150 3700 50  0001 C CNN
+	1    3150 3700
+	1    0    0    -1  
+$EndComp
+$Comp
+L MCU_Microchip_ATmega:ATmega328P-PU U?
+U 1 1 5CBF2282
+P 5550 3700
+F 0 "U?" H 4909 3746 50  0000 R CNN
+F 1 "ATmega328P-PU" H 4909 3655 50  0000 R CNN
+F 2 "Package_DIP:DIP-28_W7.62mm" H 5550 3700 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 5550 3700 50  0001 C CNN
+	1    5550 3700
+	1    0    0    -1  
+$EndComp
+$Comp
+L HC-SR04:HC-SR04 U?
+U 1 1 5CBF2376
+P 7750 2500
+F 0 "U?" H 8180 2496 50  0000 L CNN
+F 1 "HC-SR04" H 8180 2405 50  0000 L CNN
+F 2 "XCVR_HC-SR04" H 7750 2500 50  0001 L BNN
+F 3 "None" H 7750 2500 50  0001 L BNN
+F 4 "HC-SR04" H 7750 2500 50  0001 L BNN "Field4"
+F 5 "Unavailable" H 7750 2500 50  0001 L BNN "Field5"
+F 6 "HC-SR04 Ultrasonic Sensor For Arduino And Raspberry Pi HC-SR04 Ultrasonic Sensor For Arduino And Raspberry Pi" H 7750 2500 50  0001 L BNN "Field6"
+F 7 "None" H 7750 2500 50  0001 L BNN "Field7"
+F 8 "Adafruit Industries" H 7750 2500 50  0001 L BNN "Field8"
+	1    7750 2500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5CBF244D
+P 3150 2000
+F 0 "#PWR?" H 3150 1850 50  0001 C CNN
+F 1 "+5V" H 3165 2173 50  0000 C CNN
+F 2 "" H 3150 2000 50  0001 C CNN
+F 3 "" H 3150 2000 50  0001 C CNN
+	1    3150 2000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5CBF247F
+P 5550 2000
+F 0 "#PWR?" H 5550 1850 50  0001 C CNN
+F 1 "+5V" H 5565 2173 50  0000 C CNN
+F 2 "" H 5550 2000 50  0001 C CNN
+F 3 "" H 5550 2000 50  0001 C CNN
+	1    5550 2000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5CBF24B7
+P 3150 5350
+F 0 "#PWR?" H 3150 5100 50  0001 C CNN
+F 1 "GND" H 3155 5177 50  0000 C CNN
+F 2 "" H 3150 5350 50  0001 C CNN
+F 3 "" H 3150 5350 50  0001 C CNN
+	1    3150 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5CBF24EF
+P 5550 5350
+F 0 "#PWR?" H 5550 5100 50  0001 C CNN
+F 1 "GND" H 5555 5177 50  0000 C CNN
+F 2 "" H 5550 5350 50  0001 C CNN
+F 3 "" H 5550 5350 50  0001 C CNN
+	1    5550 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5CBF2521
+P 7450 2800
+F 0 "#PWR?" H 7450 2550 50  0001 C CNN
+F 1 "GND" H 7455 2627 50  0000 C CNN
+F 2 "" H 7450 2800 50  0001 C CNN
+F 3 "" H 7450 2800 50  0001 C CNN
+	1    7450 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5CBF2553
+P 7450 2300
+F 0 "#PWR?" H 7450 2150 50  0001 C CNN
+F 1 "+5V" H 7465 2473 50  0000 C CNN
+F 2 "" H 7450 2300 50  0001 C CNN
+F 3 "" H 7450 2300 50  0001 C CNN
+	1    7450 2300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5550 2000 5550 2100
+Wire Wire Line
+	5550 2100 5650 2100
+Wire Wire Line
+	5650 2100 5650 2200
+Connection ~ 5550 2100
+Wire Wire Line
+	5550 2100 5550 2200
+Wire Wire Line
+	3150 2000 3150 2100
+Wire Wire Line
+	3150 2100 3250 2100
+Wire Wire Line
+	3250 2100 3250 2200
+Connection ~ 3150 2100
+Wire Wire Line
+	3150 2100 3150 2200
+Wire Wire Line
+	3150 5200 3150 5350
+Wire Wire Line
+	5550 5200 5550 5350
+Wire Wire Line
+	7550 2700 7450 2700
+Wire Wire Line
+	7450 2700 7450 2800
+Wire Wire Line
+	7550 2400 7450 2400
+Wire Wire Line
+	7450 2400 7450 2300
+Wire Wire Line
+	7550 2500 7150 2500
+Wire Wire Line
+	7550 2600 7150 2600
+Text Label 7150 2500 0    50   ~ 0
+TRIG
+Text Label 7150 2600 0    50   ~ 0
+ECHO
+Wire Wire Line
+	3750 2600 4000 2600
+Wire Wire Line
+	3750 2500 4000 2500
+Text Label 4000 2600 2    50   ~ 0
+TRIG
+Text Label 4000 2500 2    50   ~ 0
+ECHO
+Wire Wire Line
+	3750 2700 4000 2700
+Wire Wire Line
+	6150 4400 6400 4400
+Text Label 4000 2700 2    50   ~ 0
+A
+Text Label 6400 4400 2    50   ~ 0
+A
+Wire Wire Line
+	3750 4200 4000 4200
+Wire Wire Line
+	3750 4300 4000 4300
+Wire Wire Line
+	3750 4400 4000 4400
+Text Label 4000 4200 2    50   ~ 0
+FULL
+Text Label 4000 4400 2    50   ~ 0
+EMPTY
+Text Label 4000 4300 2    50   ~ 0
+HALF
+Wire Wire Line
+	6150 2600 6500 2600
+Wire Wire Line
+	6150 2500 6500 2500
+Text Label 6500 2600 2    50   ~ 0
+SERVO
+Text Label 6500 2500 2    50   ~ 0
+OUT
+$Comp
+L power:+5V #PWR?
+U 1 1 5CBF4CF4
+P 7450 3600
+F 0 "#PWR?" H 7450 3450 50  0001 C CNN
+F 1 "+5V" H 7465 3773 50  0000 C CNN
+F 2 "" H 7450 3600 50  0001 C CNN
+F 3 "" H 7450 3600 50  0001 C CNN
+	1    7450 3600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7450 3600 7450 3700
+Wire Wire Line
+	7450 3700 7200 3700
+Wire Wire Line
+	7200 3700 7200 4000
+Wire Wire Line
+	7450 3700 7700 3700
+Wire Wire Line
+	7700 3700 7700 4000
+Connection ~ 7450 3700
+Text Label 7200 4000 2    50   ~ 0
+VCC_SERVO
+$EndSCHEMATC
