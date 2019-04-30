@@ -24,7 +24,7 @@ int main(void)
 	double distance;
 	long count;
 	
-	DDRB |= (1<<PORTB1) || (1<<PORTB2);
+	DDRB |= (1<<PORTB1) | (1<<PORTB2);
 	PORTB |= (1<<PORTB0);
 
 	sei();                /* Enable global interrupt */
@@ -67,11 +67,20 @@ int main(void)
 		count = ICR1 + (65535 * TimerOverflow); /* Take count */
 		/* 8MHz Timer freq, sound speed =343 m/s */
 		distance = (double)count / 466.47;
+		
 		if(distance < 5){
 			PORTB |= (1<<PORTB2);
+			OCR0A = 0;
 		}else{
 			PORTB &= ~(1<<PORTB2);
+			if(PINC & (1<<PORTC0)){
+				OCR0A = 175;
+			}else {
+				OCR0A = 0;
+			}
 		}
+		
+		
 		
 		
 	}
