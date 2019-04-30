@@ -71,6 +71,7 @@ int main(void)
 		
 		if(distance < 1){
 			PORTB |= (1<<PB2);
+<<<<<<< HEAD
 			OCR0A = 0;
 			_delay_ms(1500);
 			OCR0A = 175; //90
@@ -83,5 +84,24 @@ int main(void)
 		}
 		
 		
+=======
+			}else{
+			PORTB &= ~(1<<PB2);
+		}
+		
+		_delay_ms(250);
+		
+		/*servo-motor */
+		
+		if(PINC & (1<<PORTC0) ){
+				OCR0A = 0;	//0
+				_delay_ms(1500);
+				OCR0A = 175; //90
+				_delay_ms(1500);
+		}else{
+				OCR0A = 0;	
+				_delay_ms(1500);
+		}
+>>>>>>> parent of 60e2ce8... add ultrasonic function
 	}
 }
