@@ -68,17 +68,22 @@ int main(void)
 		/* 8MHz Timer freq, sound speed =343 m/s */
 		distance = (double)count / 466.47;
 		
-		if(distance < 1){
+		if(distance < 10) //full bin
+		{ 
+			PORTB |= (1<<PB2);
 			OCR0A = 0;	//0
-			_delay_ms(1500);
-			OCR0A = 175; //90
-			_delay_ms(1500);
+			_delay_ms(1000);
+		} 
+		else if(PINC & (1<<PORTC0)) //bin isn't full
+		{
+			PORTB &= ~(1<<PB2);
+			OCR0A = 175;	//0
+			_delay_ms(1000);
 		}else {
-			OCR0A = 0;
-			_delay_ms(1500);
+			PORTB &= ~(1<<PB2);
+			OCR0A = 0;	//0
+			_delay_ms(1000);
 		}
-		
-		_delay_ms(250);
 		
 		/*servo-motor */
 		

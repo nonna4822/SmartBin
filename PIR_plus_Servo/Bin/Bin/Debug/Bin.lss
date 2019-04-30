@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 00000028  00000000  00000000  000004f4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000087c  00000000  00000000  0000051c  2**0
+  6 .debug_info   00000843  00000000  00000000  0000051c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000006e2  00000000  00000000  00000d98  2**0
+  7 .debug_abbrev 000006e2  00000000  00000000  00000d5f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000357  00000000  00000000  0000147a  2**0
+  8 .debug_line   0000036f  00000000  00000000  00001441  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000048  00000000  00000000  000017d4  2**2
+  9 .debug_frame  00000048  00000000  00000000  000017b0  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000003d7  00000000  00000000  0000181c  2**0
+ 10 .debug_str    000003d7  00000000  00000000  000017f8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000018b  00000000  00000000  00001bf3  2**0
+ 11 .debug_loc    00000143  00000000  00000000  00001bcf  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000018  00000000  00000000  00001d7e  2**0
+ 12 .debug_ranges 00000018  00000000  00000000  00001d12  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -184,12 +184,12 @@ ISR(TIMER1_OVF_vect)
  100:	ef 2e       	mov	r14, r31
  102:	f1 2c       	mov	r15, r1
  104:	f0 2d       	mov	r31, r0
-		distance = (double)count / 466.47;
-		
-		if(distance < 1){
-			OCR0A = 0;	//0
-			_delay_ms(1500);
-			OCR0A = 175; //90
+			_delay_ms(1000);
+		} 
+		else if(PINC & (1<<PORTC0)) //bin isn't full
+		{
+			PORTB &= ~(1<<PB2);
+			OCR0A = 175;	//0
  106:	0f 2e       	mov	r0, r31
  108:	ff ea       	ldi	r31, 0xAF	; 175
  10a:	af 2e       	mov	r10, r31
@@ -259,7 +259,7 @@ ISR(TIMER1_OVF_vect)
 		/* 8MHz Timer freq, sound speed =343 m/s */
 		distance = (double)count / 466.47;
 		
-		if(distance < 1){
+		if(distance < 10) //full bin
  14a:	80 e0       	ldi	r24, 0x00	; 0
  14c:	90 e0       	ldi	r25, 0x00	; 0
  14e:	0e 94 56 01 	call	0x2ac	; 0x2ac <__floatsisf>
@@ -270,58 +270,65 @@ ISR(TIMER1_OVF_vect)
  15a:	0e 94 e2 00 	call	0x1c4	; 0x1c4 <__divsf3>
  15e:	20 e0       	ldi	r18, 0x00	; 0
  160:	30 e0       	ldi	r19, 0x00	; 0
- 162:	40 e8       	ldi	r20, 0x80	; 128
- 164:	5f e3       	ldi	r21, 0x3F	; 63
+ 162:	40 e2       	ldi	r20, 0x20	; 32
+ 164:	51 e4       	ldi	r21, 0x41	; 65
  166:	0e 94 dd 00 	call	0x1ba	; 0x1ba <__cmpsf2>
  16a:	88 23       	and	r24, r24
- 16c:	ac f4       	brge	.+42     	; 0x198 <main+0xda>
+ 16c:	64 f4       	brge	.+24     	; 0x186 <main+0xc8>
+		{ 
+			PORTB |= (1<<PB2);
+ 16e:	2a 9a       	sbi	0x05, 2	; 5
 			OCR0A = 0;	//0
- 16e:	17 bc       	out	0x27, r1	; 39
+ 170:	17 bc       	out	0x27, r1	; 39
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 170:	ff ed       	ldi	r31, 0xDF	; 223
- 172:	23 e9       	ldi	r18, 0x93	; 147
- 174:	84 e0       	ldi	r24, 0x04	; 4
- 176:	f1 50       	subi	r31, 0x01	; 1
- 178:	20 40       	sbci	r18, 0x00	; 0
- 17a:	80 40       	sbci	r24, 0x00	; 0
- 17c:	e1 f7       	brne	.-8      	; 0x176 <main+0xb8>
- 17e:	00 c0       	rjmp	.+0      	; 0x180 <main+0xc2>
- 180:	00 00       	nop
-			_delay_ms(1500);
-			OCR0A = 175; //90
- 182:	a7 bc       	out	0x27, r10	; 39
- 184:	9f ed       	ldi	r25, 0xDF	; 223
- 186:	e3 e9       	ldi	r30, 0x93	; 147
- 188:	f4 e0       	ldi	r31, 0x04	; 4
- 18a:	91 50       	subi	r25, 0x01	; 1
- 18c:	e0 40       	sbci	r30, 0x00	; 0
- 18e:	f0 40       	sbci	r31, 0x00	; 0
- 190:	e1 f7       	brne	.-8      	; 0x18a <main+0xcc>
- 192:	00 c0       	rjmp	.+0      	; 0x194 <main+0xd6>
- 194:	00 00       	nop
- 196:	0a c0       	rjmp	.+20     	; 0x1ac <main+0xee>
-			_delay_ms(1500);
+ 172:	ff e3       	ldi	r31, 0x3F	; 63
+ 174:	2d e0       	ldi	r18, 0x0D	; 13
+ 176:	83 e0       	ldi	r24, 0x03	; 3
+ 178:	f1 50       	subi	r31, 0x01	; 1
+ 17a:	20 40       	sbci	r18, 0x00	; 0
+ 17c:	80 40       	sbci	r24, 0x00	; 0
+ 17e:	e1 f7       	brne	.-8      	; 0x178 <main+0xba>
+ 180:	00 c0       	rjmp	.+0      	; 0x182 <main+0xc4>
+ 182:	00 00       	nop
+ 184:	c4 cf       	rjmp	.-120    	; 0x10e <main+0x50>
+			_delay_ms(1000);
+		} 
+		else if(PINC & (1<<PORTC0)) //bin isn't full
+ 186:	30 9b       	sbis	0x06, 0	; 6
+ 188:	0c c0       	rjmp	.+24     	; 0x1a2 <main+0xe4>
+		{
+			PORTB &= ~(1<<PB2);
+ 18a:	2a 98       	cbi	0x05, 2	; 5
+			OCR0A = 175;	//0
+ 18c:	a7 bc       	out	0x27, r10	; 39
+ 18e:	9f e3       	ldi	r25, 0x3F	; 63
+ 190:	ed e0       	ldi	r30, 0x0D	; 13
+ 192:	f3 e0       	ldi	r31, 0x03	; 3
+ 194:	91 50       	subi	r25, 0x01	; 1
+ 196:	e0 40       	sbci	r30, 0x00	; 0
+ 198:	f0 40       	sbci	r31, 0x00	; 0
+ 19a:	e1 f7       	brne	.-8      	; 0x194 <main+0xd6>
+ 19c:	00 c0       	rjmp	.+0      	; 0x19e <main+0xe0>
+ 19e:	00 00       	nop
+ 1a0:	b6 cf       	rjmp	.-148    	; 0x10e <main+0x50>
+			_delay_ms(1000);
 		}else {
-			OCR0A = 0;
- 198:	17 bc       	out	0x27, r1	; 39
- 19a:	2f ed       	ldi	r18, 0xDF	; 223
- 19c:	83 e9       	ldi	r24, 0x93	; 147
- 19e:	94 e0       	ldi	r25, 0x04	; 4
- 1a0:	21 50       	subi	r18, 0x01	; 1
- 1a2:	80 40       	sbci	r24, 0x00	; 0
- 1a4:	90 40       	sbci	r25, 0x00	; 0
- 1a6:	e1 f7       	brne	.-8      	; 0x1a0 <main+0xe2>
- 1a8:	00 c0       	rjmp	.+0      	; 0x1aa <main+0xec>
- 1aa:	00 00       	nop
- 1ac:	e3 e2       	ldi	r30, 0x23	; 35
- 1ae:	f4 ef       	ldi	r31, 0xF4	; 244
- 1b0:	31 97       	sbiw	r30, 0x01	; 1
- 1b2:	f1 f7       	brne	.-4      	; 0x1b0 <main+0xf2>
+			PORTB &= ~(1<<PB2);
+ 1a2:	2a 98       	cbi	0x05, 2	; 5
+			OCR0A = 0;	//0
+ 1a4:	17 bc       	out	0x27, r1	; 39
+ 1a6:	2f e3       	ldi	r18, 0x3F	; 63
+ 1a8:	8d e0       	ldi	r24, 0x0D	; 13
+ 1aa:	93 e0       	ldi	r25, 0x03	; 3
+ 1ac:	21 50       	subi	r18, 0x01	; 1
+ 1ae:	80 40       	sbci	r24, 0x00	; 0
+ 1b0:	90 40       	sbci	r25, 0x00	; 0
+ 1b2:	e1 f7       	brne	.-8      	; 0x1ac <main+0xee>
  1b4:	00 c0       	rjmp	.+0      	; 0x1b6 <main+0xf8>
  1b6:	00 00       	nop
  1b8:	aa cf       	rjmp	.-172    	; 0x10e <main+0x50>
