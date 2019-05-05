@@ -23,17 +23,18 @@ int main(void)
 	/*ultrasonic */
 	double distance;
 	long count;
-	
-	DDRB |= (1<<PORTB1) | (1<<PORTB2);
-	PORTB |= (1<<PORTB0);
+	DDRC |= 0x00;
+	DDRB |= (1<<PB2)|(1<<PB6);
+	//DDRB |= (1<<PORTB1) ;
+	PORTB |= (1<<PORTB0) | (1<<PORTB6);
 
 	sei();                /* Enable global interrupt */
 	TIMSK1 = (1 << TOIE1); /* Enable Timer1 overflow interrupts */
 	TCCR1A = 0;           /* Set all bit to zero Normal operation */
 	
 	/*servo-motor */
-	DDRC |= 0x00;
-	DDRD |= (1<<PORTD6);	/* Make OC0A pin as output */
+	//DDRC |= 0x00;
+	DDRD |= (1<<PORTD6) ;	/* Make OC0A pin as output */
 	TCNT0 = 0;		/* Set timer0 count zero */
 	TCCR0A|=(1<<COM0A1)|(1<<WGM01)|(1<<WGM00);        //NON Inverted PWM
 	TCCR0B|=(1<<CS01); //PRESCALER=256 MODE 14(FAST PWM)
@@ -41,8 +42,9 @@ int main(void)
 	
 	while (1)
 	{
+		//OCR0A = 0;
 		/* ultrasonic */
-		DDRB |= (1<<PB2);
+		//DDRB |= (1<<PB2);
 		
 		/* Give 10us trigger pulse on trig. pin to HC-SR04 */
 		PORTB |= (1 << Trigger_pin);
@@ -67,20 +69,33 @@ int main(void)
 		count = ICR1 + (65535 * TimerOverflow); /* Take count */
 		/* 8MHz Timer freq, sound speed =343 m/s */
 		distance = (double)count / 466.47;
-		
-		if(distance < 5){
+		if(distance < 0.05 ){
 			PORTB |= (1<<PORTB2);
-			OCR0A = 0;
+			_delay_ms(5000);
+			
 		}else{
+			// niti code
+			/*PORTB &= ~(1<<PORTB2);
+			OCR0A = 175;
+			_delay_ms(3000);
+			OCR0A = 0;
+			_delay_ms(3000);*/
+			
+			// nara code 
+			
 			PORTB &= ~(1<<PORTB2);
-			if(PINC & (1<<PORTC0)){
-				OCR0A = 175;
-			}else {
+			
+			if(!(PINC & (1<<PORTC0))){  //open
+				PORTB |= (1<<PORTB6);
 				OCR0A = 0;
+				_delay_ms(1000);
+			}else{ //close
+				PORTB &= ~(1<<PORTB6);
+				OCR0A = 175;
+				_delay_ms(100);
 			}
+			
 		}
-		
-		
 		
 		
 	}
